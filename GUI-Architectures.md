@@ -1,32 +1,55 @@
 There have been many different ways to organize the code for a rich client system. Here I discuss a selection of those that I feel have been the most influential and introduce how they relate to the patterns.
 
+######有许多不同的方式来组织一个富客户端系统的代码。我在此讨论那些我觉得最具影响力的并且介绍他们如何关联模式。
+
+
+
 Contents:
+内容
 
 ---
 Forms and Controls
+//窗体和控件
 
 Model View Controller
+//模型视图控制器
 
 VisualWorks Application Model
+//VisualWorks应用模型
 
 Model-View-Presenter (MVP)
+//模型-视图-Presenter(类似Controller)
 
 Humble View
+//虚拟视图
 
 ---
 
 
 This is part of the Further Enterprise Application Architecture development writing that I was doing in the mid 2000’s. Sadly too many other things have claimed my attention since, so I haven’t had time to work on them further, nor do I see much time in the foreseeable future. As such this material is very much in draft form and I won’t be doing any corrections or updates until I’m able to find time to work on it again.
 
+######这是我在2000年代中期用的更进一步应用程序架构开发的一部分。遗憾的是，有许多其他事情分散了我的注意,因此我没有时间在进一步研究,我也没有更多的时间在可预见的未来。因此，这份材料是以草稿形式的完成，在我能够找到时间再工作之前我应该不会做任何更正或更新。
+
 Graphical user interfaces have become a familiar part of our software landscape, both as users and as developers. Looking at it from a design perspective they represent a particular set of problems in system design - problems that have led to a number of different but similar solutions.
+
+######作为用户和开发人员，图形用户界面已经成为熟悉我们的软件领域的一部分。从设计的角度来看，它们代表了一些有不同但也类似的解决方案的特定的系统设计问题。
 
 My interest is identifying common and useful patterns for application developers to use in rich-client development. I've seen various designs in project reviews and also various designs that have been written in a more permanent way. Inside these designs are the useful patterns, but describing them is often not easy. Take Model-View-Controller as an example. It's often referred to as a pattern, but I don't find it terribly useful to think of it as a pattern because it contains quite a few different ideas. Different people reading about MVC in different places take different ideas from it and describe these as 'MVC'. If this doesn't cause enough confusion you then get the effect of misunderstandings of MVC that develop through a system of Chinese whispers.
 
+######我的兴趣是识别应用程序开发人员在富客户端开发中使用的通用和有用的模式。我在项目审查中看过各种各样的设计，还有用更永久的方式写的。在这些设计中是有用的模式,但描述他们常常是不容易的。以MVC为例，这是通常被称为一个模式,但我不觉得它是一个非常有用的模式,因为它包含了很多不同的想法。在不同的地方，不同的人阅读MVC会有不同的的想法来描述这些“MVC”。如果这不会引起足够的混乱，然后通过一个系统的传言误解MVC开发。
+
+
 In this essay I want to explore a number of interesting architectures and describe my interpretation of their most interesting features. My hope is that this will provide a context for understanding the patterns that I describe.
+
+######在这篇文章中,我想探索许多有趣的架构和描述我对他们最有趣的特征的解释。我希望这将为理解我描述的模式提供一个上下文。
 
 To some extent you can see this essay as a kind of intellectual history that traces ideas in UI design through multiple architectures over the years. However I must issue a caution about this. Understanding architectures isn't easy, especially when many of them change and die. Tracing the spread of ideas is even harder, because people read different things from the same architecture. In particular I have not done an exhaustive examination of the architectures I describe. What I have done is referred to common descriptions of the designs. If those descriptions miss things out, I'm utterly ignorant of that. So don't take my descriptions as authoritative. Furthermore there are things I've left out or simplified if I didn't think they were particularly relevant. Remember my primary interest is the underlying patterns, not in the history of these designs.
 
+######从某种程度上说，你可以把这篇文章看作是一种思想史，通过多年的体系结构，在UI设计中追踪思想。然而我必须对此发出警告。理解体系结构并不容易,尤其是当他们中的许多变化和死亡。跟踪思想的传播是更加困难的,因为人们会从相同的架构阅读不同的东西。特别是我没有对我描述的架构做详尽的检查.我t提及的一切是指常见的设计描述。如果有些描述漏掉了，我完全不知道。所以不要把我描述为权威。而且我忽略或简化了我觉得他们不是特别相关的东西。记住我的主要兴趣是底层的模式,而不是在这些设计的历史。
+
 (There is something of an exception here, in that I did have access to a running Smalltalk-80 to examine MVC. Again I wouldn't describe my examination of it as exhaustive, but it did reveal things that common descriptions of it failed to - which even further makes me cautious about descriptions of other architectures that I have here. If you are familiar with one of these architectures and you see I have something important that is incorrect and missing I'd like to know about it. I also think that a more exhaustive survey of this territory would be a good object of academic study.)
+
+######（这里是一个例外,在我访问运行smalltalk - 80检查MVC。我不会描述我探究的详尽的内容,但它确实揭示事物共同的描述它未能进一步——这让我谨慎的描述这里的其他体系结构，如果您熟悉这些架构之一，你会发现我有一些重要的东西是不正确的，我想知道它。我也认为这是一个更详尽的调查,这一领域将会是一个良好的学术研究的对象。）
 
 
 Forms and Controls
@@ -284,12 +307,19 @@ Here are the MVP soundbites:
 
 Humble View
 ---
+####虚拟视图
+
 
 In the past few years there's been a strong fashion for writing self-testing code. Despite being the last person to ask about fashion sense, this is a movement that I'm thoroughly immersed in. Many of my colleagues are big fans of xUnit frameworks, automated regression tests, Test-Driven Development, Continuous Integration and similar buzzwords.
+######在过去的几年里，编写自测代码是一种很流行的方式，尽管是追随时尚感的最后一人，但也是我全身心投入的运动。我的许多同事都是xUnit框架的粉丝，自动化的回归测试，测试驱动开发、持续集成和类似的流行语。
 
 When people talk about self-testing code user-interfaces quickly raise their head as a problem. Many people find that testing GUIs to be somewhere between tough and impossible. This is largely because UIs are tightly coupled into the overall UI environment and difficult to tease apart and test in pieces.
 
+#####当人们谈论自我测试代码时，用户界面很快就把他们的头当作一个问题。许多人发现测试GUI是介于艰难和不可能的。这主要是因为用户界面紧密结合为整体的界面环境，难以梳理和测试。
+
 Sometimes this test difficulty is over-stated. You can often get surprisingly far by creating widgets and manipulating them in test code. But there are occasions where this is impossible, you miss important interactions, there are threading issues, and the tests are too slow to run.
+
+#####有时这个测试困难是有些夸张。通常可以通过创建小部件和在测试代码中操作它们来获得惊人的效果。但有些情况下，这是不可能的，你错过了重要的相互作用，有线程问题，测试运行速度太慢。
 
 As a result there's been a steady movement to design UIs in such a way that minimizes the behavior in objects that are awkward to test. Michael Feathers crisply summed up this approach in The Humble Dialog Box. Gerard Meszaros generalized this notion to idea of a Humble Object - any object that is difficult to test should have minimal behavior. That way if we are unable to include it in our test suites we minimize the chances of an undetected failure.
 
