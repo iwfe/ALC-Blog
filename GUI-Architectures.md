@@ -9,7 +9,7 @@ Contents:
 
 ---
 Forms and Controls
-//窗体和控件
+//表单和控件
 
 Model View Controller
 //模型视图控制器
@@ -53,14 +53,14 @@ To some extent you can see this essay as a kind of intellectual history that tra
 
 
 Forms and Controls
-## 窗体以及控件
+## 表单以及控件
 ---
 
 
 
 I shall begin this exploration with an architecture that is both simple and familiar. It doesn't have a common name, so for the purposes of this essay I shall call it "Forms and Controls". It's a familiar architecture because it was the one encouraged by client-server development environments in the 90's - tools like Visual Basic, Delphi, and Powerbuilder. It continues to be commonly used, although also often vilified by design geeks like me.
 
-###### 我打算从一个简单且熟悉的架构开始这次的分享之旅。它并没有一个统一的名字，为了符合这篇文章的主题，我把它称之为“窗体以及控件”。在90年代，它是一个大家都熟悉的架构，那时候是被很多工具所推荐的架构，这些工具包括Visual Basic，Delphi和Powerbuilder等。直到现在仍然被大量使用，它也经常被与我类似的设计怪胎所推荐。
+###### 我打算从一个简单且熟悉的架构开始这次的分享之旅。它并没有一个统一的名字，为了符合这篇文章的主题，我把它称之为“表单以及控件”。在90年代，它是一个大家都熟悉的架构，那时候是被很多工具所推荐的架构，这些工具包括Visual Basic，Delphi和Powerbuilder等。直到现在仍然被大量使用，它也经常被与我类似的设计怪胎所推荐。
 
 To explore it, and indeed the other architectures, I'll use a common example. In New England, where I live, there is a government program that monitors the amount of ice-cream particulate in the atmosphere. If the concentration is too low, this indicates that we aren't eating enough ice-cream - which poses a serious risk to our economy and public order. (I like to use examples that are no less realistic as you usually find in books like this.)
 
@@ -77,6 +77,7 @@ Figure 1: The UI I'll use as an example.
 
 
 As we look at this screen we can see there is an important division as we put it together. The form is specific to our application, but it uses controls that are generic. Most GUI environments come with a hefty bunch of common controls that we can just use in our application. We can build new controls ourselves, and often it's a good idea to do so, but there is still a distinction between generic reusable controls and specific forms. Even specially written controls can be reused across multiple forms.
+###### 想象我们看着这个由多个部分组成的界面，我们可以看到一个重要的部分。这个表单特定用于我们的应用程序，但它使用的是一个通用组件。大多数GUI都都会使用大量的常用控件，这些控件我们可以在应用程序中直接使用。我们也可以自己构建新的空间，通常而言，这是一个好主意，但是可复用组件与特殊组件之类仍有区别。当然，即使是为特定场景而写的组件也依然可以在多个表单之间复用。
 
 The form contains two main responsibilities:
 
