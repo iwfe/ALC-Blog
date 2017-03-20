@@ -53,19 +53,27 @@ To some extent you can see this essay as a kind of intellectual history that tra
 
 
 Forms and Controls
+## 窗体以及控件
 ---
 
 
 
 I shall begin this exploration with an architecture that is both simple and familiar. It doesn't have a common name, so for the purposes of this essay I shall call it "Forms and Controls". It's a familiar architecture because it was the one encouraged by client-server development environments in the 90's - tools like Visual Basic, Delphi, and Powerbuilder. It continues to be commonly used, although also often vilified by design geeks like me.
 
+###### 我打算从一个简单且熟悉的架构开始这次的分享之旅。它并没有一个统一的名字，为了符合这篇文章的主题，我把它称之为“窗体以及控件”。在90年代，它是一个大家都熟悉的架构，那时候是被很多工具所推荐的架构，这些工具包括Visual Basic，Delphi和Powerbuilder等。直到现在仍然被大量使用，它也经常被与我类似的设计怪胎所推荐。
+
 To explore it, and indeed the other architectures, I'll use a common example. In New England, where I live, there is a government program that monitors the amount of ice-cream particulate in the atmosphere. If the concentration is too low, this indicates that we aren't eating enough ice-cream - which poses a serious risk to our economy and public order. (I like to use examples that are no less realistic as you usually find in books like this.)
 
+###### 为了探索它，以及其他架构，我将使用一个常见的例子。 在我住的地方，新英格兰，有一个政府计划，监测大气中冰激凌颗粒的数量。 如果浓度太低，这表明我们没有吃足够的冰淇淋 - 这对我们的经济和公共秩序构成严重的风险。 （我喜欢使用不那么现实的例子，你通常在这样的书中找到。）
+
 To monitor our ice-cream health, the government has set up monitoring stations all over the New England states. Using complex atmospheric modeling the department sets a target for each monitoring station. Every so often staffers go out on an assessment where they go to various stations and note the actual ice-cream particulate concentrations. This UI allows them to select a station, and enter the date and actual value. The system then calculates and displays the variance from the target. The system highlights the variance in red when it is 10% or more below the target, or in green when 5% or more above the target.
+
+###### 为了监测我们的冰淇淋指数，政府在新英格兰各州设立了监测站。 利用复杂的大气模型，该部门为每个监测站设定目标。 每隔一段时间，工作人员会出去进行评估，他们去各个监测站，手机实际的冰淇淋颗粒浓度。 有一个UI界面允许他们选择一个监测站，并输入日期和实际值。 然后系统计算并显示目标的方差。 当实际浓度低于目标10％或更多时，系统突出显示方差值为红色;当实际浓度高于目标5％或更多时，系统突出显示方差值为绿色。
 
 ![img](https://martinfowler.com/eaaDev/uiArchs/assessmentUI.gif)
 
 Figure 1: The UI I'll use as an example.
+###### 图片1：我将作为一个例子的UI界面
 
 
 As we look at this screen we can see there is an important division as we put it together. The form is specific to our application, but it uses controls that are generic. Most GUI environments come with a hefty bunch of common controls that we can just use in our application. We can build new controls ourselves, and often it's a good idea to do so, but there is still a distinction between generic reusable controls and specific forms. Even specially written controls can be reused across multiple forms.
