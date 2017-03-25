@@ -276,7 +276,15 @@ Model-View-Presenter (MVP)
 
 MVP is an architecture that first appeared in IBM and more visibly at Taligent during the 1990's. It's most commonly referred via the Potel paper. The idea was further popularized and described by the developers of Dolphin Smalltalk. As we'll see the two descriptions don't entirely mesh but the basic idea underneath it has become popular.
 
+MVP作为一个架构最早出现在IBM，更确切的说是在1990年代的Taligent,
+
+经常通过Potel纸张引用，经过Dolphin Smalltalk开发者的描述，更加流行。
+
+以我们所见这两个描述虽不吻合，但其基础想法变得更加流行。
+
 To approach MVP I find it helpful to think about a significant mismatch between two strands of UI thinking. On the one hand is the Forms and Controller architecture which was the mainstream approach to UI design, on the other is MVC and its derivatives. The Forms and Controls model provides a design that is easy to understand and makes a good separation between reusable widgets and application specific code. What it lacks, and MVC has so strongly, is Separated Presentation and indeed the context of programming using a Domain Model. I see MVP as a step towards uniting these streams, trying to take the best from each.
+
+
 
 The first element of Potel is to treat the view as a structure of widgets, widgets that correspond to the controls of the Forms and Controls model and remove any view/controller separation. The view of MVP is a structure of these widgets. It doesn't contain any behavior that describes how the widgets react to user interaction.
 
