@@ -323,14 +323,28 @@ Sometimes this test difficulty is over-stated. You can often get surprisingly fa
 
 As a result there's been a steady movement to design UIs in such a way that minimizes the behavior in objects that are awkward to test. Michael Feathers crisply summed up this approach in The Humble Dialog Box. Gerard Meszaros generalized this notion to idea of a Humble Object - any object that is difficult to test should have minimal behavior. That way if we are unable to include it in our test suites we minimize the chances of an undetected failure.
 
+#####因此有一种稳定的方式设计用户界面，这种方式可以最大限度地减少那些难的测试对象的行为。Michael Feathers在一个简陋的对话框中清楚地总结了这种方法。Gerard Meszaros将这个概念推广到一个小的对象的想法-任何对象是难以测试的，应该有最小的行为。这样的话如果我们不能将它包含在我们的测试套件，我们可以有机会最大限度地减少未知的失败。
+
 The Humble Dialog Box paper uses a presenter, but in a much deeper way than the original MVP. Not just does the presenter decide how to react to user events, it also handles the population of data in the UI widgets themselves. As a result the widgets no longer have, nor need, visibility to the model; they form a Passive View, manipulated by the presenter.
+
+#####这个简陋的对话框纸使用了一个演示器，但比原来的MVP要深得多。演示器不仅仅决定如何对用户事件做出反应，它还处理用户界面组件中的数据的入口。因此，小部件不再有，也不需要，可见的模型；他们形成一个被动的看法，由演示器操纵。
 
 This isn't the only way to make the UI humble. Another approach is to use Presentation Model, although then you do need a bit more behavior in the widgets, enough for the widgets to know how to map themselves to the Presentation Model.
 
+#####这不是唯一的方法使UI变的轻巧。另一种方法是使用演示模型，虽然在组件中确实需要更多的行为，这足以让小部件知道如何将自己映射到演示模型。
+
 The key to both approaches is that by testing the presenter or by testing the presentation model, you test most of the risk of the UI without having to touch the hard-to-test widgets.
+
+#####这两种方法的关键是，通过测试演示者或测试演示模型，您可以测试的大部分UI的风险，而无需触摸硬测试部件。
 
 With Presentation Model you do this by having all the actual decision making made by the Presentation Model. All user events and display logic is routed to the Presentation Model, so that all the widgets have to do is map themselves to properties of the Presentation Model. You can then test most of the behavior of the Presentation Model without any widgets being present - the only remaining risk lies in the widget mapping. Provided that this is simple you can live with not testing it. In this case the screen isn't quite as humble as with the Passive View approach, but the difference is small.
 
+#####使用演示模型，您可以通过它来实现所做的所有实际的决策。所有用户事件和显示逻辑路由到演示模型,以便所有的部件都必须将其映射到需要呈现模型的属性。然后，不需要任何部件你就可以测试演示模型的大部分行为-唯一剩下的风险在于部件映射。只要这是简单的，你可以忍受不测试它。在这种情况下，屏幕不像被动视图方法那么简单，但是差别很小。
+
 Since Passive View makes the widgets entirely humble, without even a mapping present, Passive View eliminates even the small risk present with Presentation Model. The cost however is that you need a Test Double to mimic the screen during your test runs - which is extra machinery you need to build.
 
+#####由于视图层使组件比较简陋，即使没有映射存在，视图层消除甚至呈现出演示层的风险。然而，成本是，你需要在你的测试运行时建立一个测试双模拟屏幕-这是额外你需要做的。
+
 A similar trade-off exists with Supervising Controller. Having the view do simple mappings introduces some risk but with the benefit (as with Presentation Model) of being able to specify simple mapping declaratively. Mappings will tend to be smaller for Supervising Controller than for Presentation Model as even complex updates will be determined by the Presentation Model and mapped, while a Supervising Controller will manipulate the widgets for complex cases without any mapping involved.
+
+#####与控制层存在类似的权衡。有些观点简单介绍了视图层的风险，但也有好处(如演示模型)中明确指定简单的映射。相比演示模型，控制层的映射倾向于更小，复杂的更新将取决于表示层和映射,控制层在操纵复杂的情况下，没有部件涉及到映射。
