@@ -284,21 +284,40 @@ MVP作为一个架构最早出现在IBM，更确切的说是在1990年代的Tali
 
 To approach MVP I find it helpful to think about a significant mismatch between two strands of UI thinking. On the one hand is the Forms and Controller architecture which was the mainstream approach to UI design, on the other is MVC and its derivatives. The Forms and Controls model provides a design that is easy to understand and makes a good separation between reusable widgets and application specific code. What it lacks, and MVC has so strongly, is Separated Presentation and indeed the context of programming using a Domain Model. I see MVP as a step towards uniting these streams, trying to take the best from each.
 
+为了达到MVP我发现思考两条主UI思想的重要区别很有帮助，其中一个Forms和Controller的架构是达到UI设计的主流，另一个是MVC以及它的衍生品。Forms和Controls的模型提供了一个易于理解同时很好的
+隔离了重用组件和应用逻辑代码。它缺乏的正是MVC的强项：使用Domain Model隔离展示和程序上下文。我看到MVP打算统一这些主流思想，并尝试从中吸取最好的想法。
 
 
 The first element of Potel is to treat the view as a structure of widgets, widgets that correspond to the controls of the Forms and Controls model and remove any view/controller separation. The view of MVP is a structure of these widgets. It doesn't contain any behavior that describes how the widgets react to user interaction.
 
+Potel的第一要素是将视图作为组件的一个结构，组件对应于Forms和Controls的控件同时移出任何视图和控制器的分离，MVP的视图就是这些组件的结构，它并不包含组件如何响应用户交互的任何行为。
+
 The active reaction to user acts lives in a separate presenter object. The fundamental handlers for user gestures still exist in the widgets, but these handlers merely pass control to the presenter.
+
+对用户操作的积极反馈存在于一个分开的展示对象中，对用户手势的基础处理依旧存在于组件中，但是这些处理方法只是把控制权交还给展示对象。
 
 The presenter then decides how to react to the event. Potel discusses this interaction primarily in terms of actions on the model, which it does by a system of commands and selections. A useful thing to highlight here is the approach of packaging all the edits to the model in a command - this provides a good foundation for providing undo/redo behavior.
 
+这些展示对象决定如何响应事件，Potel主要通过系统的命令和选择的模型来讨论这种交互。这里要强调一个有用的东西是打包对模型所有的修改到一个命令中，这就为提供undo/redo行为打下了一个好的基础。
+
 As the Presenter updates the model, the view is updated through the same Observer Synchronization approach that MVC uses.
+
+当展示着更新模型时，视图通过MVC也使用的观察者同步方法得到更新。
 
 The Dolphin description is similar. Again the main similarity is the presence of the presenter. In the Dolphin description there isn't the structure of the presenter acting on the model through commands and selections. There is also explicit discussion of the presenter manipulating the view directly. Potel doesn't talk about whether presenters should do this or not, but for Dolphin this ability was essential to overcoming the kind of flaw in Application Model that made it awkward for me to color the text in the variation field.
 
+Dophin的描述是类似的，主要相似之处在于presenter的存在。在Dolphin的描述中，没有通过命令和选择对模型进行操作的结构。有对视图直接操作的讨论。Potel并没有
+讨论presenters是否应该做或者不做，但是对于Dolphin在应用模型中克服这种曾使我在变化域中着色感到尴尬的缺陷是必要的。
+
 One of the variations in thinking about MVP is the degree to which the presenter controls the widgets in the view. On one hand there is the case where all view logic is left in the view and the presenter doesn't get involved in deciding how to render the model. This style is the one implied by Potel. The direction behind Bower and McGlashan was what I'm calling Supervising Controller, where the view handles a good deal of the view logic that can be described declaratively and the presenter then comes in to handle more complex cases.
 
+MVP思考的一个变化是演示者在视图中控制组件的程度。一方面，有一种在视图中存在所有视图逻辑的情况，presenter不参与决定如何呈现模型。这种风格是被Potel所暗指的。
+Bower和McGlashan的方向正是我称为的超级控制器，视图处理了大量可以声明性描述的视图逻辑，然后presenter来处理更复杂的情况。
+
 You can also move all the way to having the presenter do all the manipulation of the widgets. This style, which I call Passive View isn't part of the original descriptions of MVP but got developed as people explored testability issues. I'm going to talk about that style later, but that style is one of the flavors of MVP.
+
+你也可以使presenter来对组件进行所有的操作。这种风格我称之为被动视图，但并不是期初MVP所描述的部分，可是随着人们探索可测性问题而开发出来。我打算
+在稍后的时候讨论这种风格，但这种风格是MVP模式里最受喜爱其一。
 
 Before I contrast MVP with what I've discussed before I should mention that both MVP papers here do this too - but not quite with the same interpretation I have. Potel implies that MVC controllers were overall coordinators - which isn't how I see them. Dolphin talks a lot about issues in MVC, but by MVC they mean the VisualWorks Application Model design rather than classic MVC that I've described (I don't blame them for that - trying to get information on classic MVC isn't easy now let alone then.)
 
