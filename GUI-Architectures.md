@@ -81,12 +81,24 @@ As we look at this screen we can see there is an important division as we put it
 
 The form contains two main responsibilities:
 
+###### 这个表单有两个职责：
+
 * Screen layout: defining the arrangement of the controls on the screen, together with their hierarchic structure with one other.
+
+* 屏幕的布局：决定屏幕上控件的位置，以及其层次结构
+
 * Form logic: behavior that cannot be easily programmed into the controls themselves.
+
+* 表单的交互逻辑：控件交互并不是那么容易就能实现
+
 
 Most GUI development environments allow the developer to define screen layout with a graphical editor that allows you to drag and drop the controls onto a space in the form. This pretty much handles the form layout. This way it's easy to setup a pleasing layout of controls on the form (although it isn't always the best way to do it - we'll come to that later.)
 
+###### 大多数GUI开发环境都允许开发人员自定义屏幕布局，你可以直接将控件拖拽到任意位置。这个方式几乎解决了绝大部分表单布局问题。通过这种方式，可以轻松愉快地在表单上进行布局。（尽管大多数情况下不是最好的方法-稍后会做介绍）
+
 The controls display data - in this case about the reading. This data will pretty much always come from somewhere else, in this case let's assume a SQL database as that's the environment that most of these client-server tools assume. In most situations there are three copies of the data involved:
+
+###### 阅读时，控件展示数据。我们假设有一个SQL数据库，就像大多数客户端-服务端工具假设的环境一样，在这种情况下，这个数据几乎来自别的地方。在大多数情况下，会设计三份数据：
 
 * One copy of data lies in the database itself. This copy is the lasting record of the data, so I call it the record state. The record state is usually shared and visible to multiple people via various mechanisms.
 * A further copy lies inside in-memory Record Sets within the application. Most client-server environments provided tools which made this easy to do. This data was only relevant for one particular session between the application and the database, so I call it session state. Essentially this provides a temporary local version of the data that the user works on until they save, or commit it, back to the database - at which point it merges with the record state. I won't worry about the issues around coordinating record state and session state here: I did go into various techniques in [P of EAA].
